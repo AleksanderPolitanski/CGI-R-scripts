@@ -1,0 +1,12 @@
+Sub Clear_Formatting()
+'
+' Clear_rules Macro
+'
+
+'
+    Range("A1").Select
+    ActiveCell.CurrentRegion.Select
+    Cells.FormatConditions.Delete
+    Range("A1").Select
+    End Sub
+

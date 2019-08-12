@@ -1,0 +1,25 @@
+Sub HighlightEndingSpaces()
+'
+' Macro1 Macro
+'
+
+'
+    Range("A1").Select
+    ActiveCell.CurrentRegion.Select
+    Selection.FormatConditions.Add Type:=xlTextString, String:=" ", _
+        TextOperator:=xlEndsWith
+    Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
+    With Selection.FormatConditions(1).Font
+        .ThemeColor = xlThemeColorAccent4
+        .TintAndShade = 0.399945066682943
+    End With
+    With Selection.FormatConditions(1).Interior
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent4
+        .TintAndShade = -0.249946592608417
+    End With
+    Selection.FormatConditions(1).StopIfTrue = False
+    Range("A1").Select
+End Sub
+
+
