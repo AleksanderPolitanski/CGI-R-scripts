@@ -41,7 +41,7 @@ lapply(libs, FUN=library, character.only=TRUE )
 
 ids<-read.table(paste0(path, "Id.txt"), stringsAsFactors = FALSE)
 ids<-ids$V1
-
+setwd(path)
 
 # generate token from the salesforce environment, save it and authorise. cacheing is turned off
 
@@ -148,3 +148,11 @@ write.xlsx(Query_result, file = paste0(path, "Query result at ",creation_time,".
 # Just a signal that program has finished running
 beep(sound = 12)
 
+# Set back working directory to usual one
+infor<-data.frame(Sys.info())
+us<-as.character(infor["user",])
+setwd(paste0("C:/Users/",us,"/Documents/"))
+      
+      
+      
+      
