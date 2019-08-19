@@ -86,7 +86,7 @@ for (i in seq(from=1,to=length(ids),by=i_rows)) {
   )
   
 Object_Content_soql<-gsub(pattern = "\n", replacement = "", x = Object_Content_soql)
-Object_Content <- sf_query(Object_Content_soql, api_type = "Bulk 1.0", object_name = object)
+Object_Content <- sf_query(Object_Content_soql)
 Query_result <- rbind(Query_result,Object_Content)
 Query_result<-Query_result %>% distinct()
 print(paste0('Iteration number ',j," out of ",j_max," is done. Time: ",format(Sys.time(), "%X") ))
@@ -116,7 +116,7 @@ for (i in seq(from=1,to=length(ids),by=i_rows)) {
   )
   
 Object_Content_soql<-gsub(pattern = "\n", replacement = "", x = Object_Content_soql)
-Object_Content <- sf_query(Object_Content_soql, api_type = "Bulk 1.0", object_name = object)
+Object_Content <- sf_query(Object_Content_soql)
 Query_result <- rbind(Query_result,Object_Content)
 Query_result<-Query_result %>% distinct()
 print(paste0('Iteration number ',j," out of ",j_max," is done. Time: ",format(Sys.time(), "%X") ))
