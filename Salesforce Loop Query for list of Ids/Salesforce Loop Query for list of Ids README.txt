@@ -11,3 +11,5 @@ You need to set several variables in the script
 3. OUTPUT:
 - R log: information about current status of the query (which iteration is done + current time)
 - output file/files in chosen format
+4. LIMITATIONS:
+!! Program doesn't let user query fields with characteristic 'queryByDistance' (for ex. MailingAddress on Contact object)
