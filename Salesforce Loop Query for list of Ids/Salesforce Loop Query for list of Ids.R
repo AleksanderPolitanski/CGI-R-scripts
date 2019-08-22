@@ -60,11 +60,12 @@ if (env == "Sandbox") {
 
 ###################################################################################
 
+  Object_Fields<-sf_describe_object_fields(object_name = object)
+  Object_Fields<-Object_Fields[Object_Fields$queryByDistance=="false",]
+  Object_Names<-Object_Fields$name
 
 if (fields == "ALL") {
-  Object_Fields<-sf_describe_object_fields(object_name = object)
-  Object_Names<-Object_Fields$name
-  
+
   Query_result<-data.frame()
   j<-1
   j_max<-ceiling(length(ids)/i_rows)
@@ -95,6 +96,17 @@ j<-j+1
 
 } else {
   
+  
+  # Check if fields are valid, if not - don't query them
+  
+  fields_checked<-gsub(pattern = " ",replacement = "",x = fields)
+  fields_checked<-data.frame(unlist(strsplit(fields_checked, split=",")))
+  names(fields_checked)<-"fields"
+  fields_checked<-data.frame(fields_checked) %>% left_join(Object_Fields, by=c("fields"="name"))
+  fields_checked<-fields_checked[(fields_checked$queryByDistance=="false")|(is.na(fields_checked$queryByDistance)==TRUE),"fields"]
+  
+  # Proceed with query
+  
   Query_result<-data.frame()
   j<-1
   j_max<-ceiling(length(ids)/i_rows)
@@ -103,7 +115,7 @@ for (i in seq(from=1,to=length(ids),by=i_rows)) {
 
   Object_Content_soql<-paste0("
   SELECT ",
-  paste(fields), "
+  paste(fields_checked,collapse = ","), "
   FROM ",
   object, "
   WHERE
@@ -152,7 +164,3 @@ beep(sound = 12)
 infor<-data.frame(Sys.info())
 us<-as.character(infor["user",])
 setwd(paste0("C:/Users/",us,"/Documents/"))
-      
-      
-      
-      
