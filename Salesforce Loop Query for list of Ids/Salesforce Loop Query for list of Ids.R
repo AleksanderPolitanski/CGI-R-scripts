@@ -31,9 +31,16 @@ out<-"both"
 ######################################################################################################################################################################
 ######################################################################################################################################################################
 
-# Load libraries
+# Used packages
+libs<-c("dplyr","httpuv","openxlsx","salesforcer","beepr","readr")
 
-libs<-c("dplyr","httpuv","openxlsx","salesforcer","beepr")
+# Install packages if needed
+new.packages <- libs[!(libs %in% installed.packages()[,"Package"])]
+
+if(length(new.packages)) {
+  install.packages(new.packages)}
+
+# Load packages
 lapply(libs, FUN=library, character.only=TRUE )
 
 
@@ -145,11 +152,12 @@ j<-j+1
 
 creation_time<-gsub(x = format(Sys.time(), "%X"), pattern = "\\:", replacement = " ")
 
+  
 if(out == "both"){
 write.xlsx(Query_result, file = paste0(path, "Query result at ",creation_time,".xlsx"))
-write.csv(x = Query_result, file = paste0(path, "Query result at ",creation_time,".csv"), quote = TRUE, row.names = FALSE, fileEncoding = "UTF-8")
+write_excel_csv(x = Query_result, path = paste0(path, "Query result at ",creation_time,".csv"), na = "")
 } else if (out == "csv") {
-write.csv(x = Query_result, file = paste0(path, "Query result at ",creation_time,".csv"), quote = TRUE, row.names = FALSE, fileEncoding = "UTF-8")
+write_excel_csv(x = Query_result, path = paste0(path, "Query result at ",creation_time,".csv"), na = "")
 } else if (out == "xlsx") {
 write.xlsx(Query_result, file = paste0(path, "Query result at ",creation_time,".xlsx"))
 }
