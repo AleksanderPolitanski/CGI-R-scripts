@@ -809,8 +809,23 @@ names(Merged_out)<-c("Ids","Acc Parent Guardian","ACR org","LiveChatTranscript",
 Merged_out$Max_date <- apply(Merged_out[,-1],1,max,na.rm=TRUE)
 
 
+dates_edit<-Merged_out$Max_date
+
+for (i in 1:length(dates_edit)){
+  if(is.na(dates_edit[i])==TRUE){
+    dates_edit[i]<-dates_edit[i]
+  } else if(nchar(dates_edit[i])<11){
+    dates_edit[i]<-paste0(dates_edit[i]," 00:00:00")
+  }
+}
+
+
+Merged_out$Max_date<-dates_edit
+
+
 write.xlsx(x = Merged_out, file = paste0(path,"dates from children.xlsx"))
 
 
 
 print(paste0('Finished at ',format(Sys.time(), "%X") ))
+
