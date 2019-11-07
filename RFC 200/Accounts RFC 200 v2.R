@@ -425,20 +425,17 @@ Opp_Won_result<-Opp_Won_result %>%
 
 Opp_Won_result<-data.frame(Opp_Won_result,Start_close)
 
+
 for (i in 1:length(Opp_Won_result$AccountId)){
-    Opp_Won_result$days_plus[i]<-as.Date(Opp_Won_result$Expected_Project_Duration_Months__c[i]*30)
-    Opp_Won_result$Start_close_plus_days[i]<-Opp_Won_result$Start_close[i]+Opp_Won_result$days_plus[i]
-}
-
-
-Opp_Won_result$Start_close_plus_days<-as.Date(Opp_Won_result$Start_close_plus_days)
+  month(Opp_Won_result$Start_close[i])<-month(Opp_Won_result$Start_close[i])+Opp_Won_result$Expected_Project_Duration_Months__c[i]
+  }
 
 
 
 #####################################################################################################
 
 
-Opp_Won_result_work_max<-data.frame(Opp_Won_result$AccountId,Opp_Won_result$rebuild_LastModifiedDate__c,Opp_Won_result$Start_close_plus_days)
+Opp_Won_result_work_max<-data.frame(Opp_Won_result$AccountId,Opp_Won_result$rebuild_LastModifiedDate__c,Opp_Won_result$Start_close)
 
 # Take max date from extracted columns after additional work
 Opp_Won_result_work_max<-apply(Opp_Won_result_work_max[,-1],1,max,na.rm=TRUE)
@@ -454,7 +451,6 @@ Opp_Won_result_out <- Opp_Won_result_out %>%
   select(AccountId, Max_date) %>%
   group_by(AccountId) %>%
   summarise(Max_date_distinct=max(Max_date))
-
 
 
 
@@ -553,18 +549,16 @@ Opp_Part_Won_result<-data.frame(Opp_Part_Won_result,Start_close)
 
 
 for (i in 1:length(Opp_Part_Won_result$Partner__c)){
-    Opp_Part_Won_result$days_plus[i]<-as.Date(Opp_Part_Won_result$Opportunity__r.Expected_Project_Duration_Months__c[i]*30)
-    Opp_Part_Won_result$Start_close_plus_days[i]<-Opp_Part_Won_result$Start_close[i]+Opp_Part_Won_result$days_plus[i]
-}
+  month(Opp_Part_Won_result$Start_close[i])<-month(Opp_Part_Won_result$Start_close[i])+Opp_Part_Won_result$Opportunity__r.Expected_Project_Duration_Months__c[i]
+  }
 
 
-Opp_Part_Won_result$Start_close_plus_days<-as.Date(Opp_Part_Won_result$Start_close_plus_days)
 
 
 #####################################################################################################
 
 
-Opp_Part_Won_result_work_max<-data.frame(Opp_Part_Won_result$Partner__c,Opp_Part_Won_result$Opportunity__r.rebuild_LastModifiedDate__c,Opp_Part_Won_result$Start_close_plus_days)
+Opp_Part_Won_result_work_max<-data.frame(Opp_Part_Won_result$Partner__c,Opp_Part_Won_result$Opportunity__r.rebuild_LastModifiedDate__c,Opp_Part_Won_result$Start_close)
 
 # Take max date from extracted columns after additional work
 Opp_Part_Won_result_work_max<-apply(Opp_Part_Won_result_work_max[,-1],1,max,na.rm=TRUE)
@@ -580,7 +574,6 @@ Opp_Part_Won_result_out <- Opp_Part_Won_result_out %>%
   select(AccountId, Max_date) %>%
   group_by(AccountId) %>%
   summarise(Max_date_distinct=max(Max_date))
-
 
 
 ###################################################################################
