@@ -670,7 +670,7 @@ j<-j+1
 
   
 # Take max date from extracted columns after additional work
-Placement_Test_Attendance__c_result_max<-apply(Placement_Test_Attendance__c_result[,c(1,2)],1,max,na.rm=TRUE)
+Placement_Test_Attendance__c_result_max<-apply(Placement_Test_Attendance__c_result[,-1],1,max,na.rm=TRUE)
   
   
 # Prepare Opp_Won_result_out data frame
