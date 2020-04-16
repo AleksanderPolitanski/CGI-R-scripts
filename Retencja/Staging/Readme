@@ -3,5 +3,6 @@ Data utworzenia readme: 16 kwietnia 2020
 Skrypt Accounts_19FEB_1:
 - Powinien działać na person accountach; puścić go w 4 osobnych kawałkach, każdy po ok 500tys rekordów
 - Potrzebuje pliku 'Ids to exclude.txt' - tam są trzymane id rekordów, które mają rekordowo dużą ilość powiązanych obiektów
-- Można zastanowić się nad wczytywaniem od razu pliku z workbencha, bez kroku pośredniego z przerzucaniem id to .txt
+- Można zastanowić się nad wczytywaniem od razu pliku z workbencha, bez kroku pośredniego z przerzucaniem id do .txt 
+  tylko uwaga! pamiętać o losowej kolejności id!
 
