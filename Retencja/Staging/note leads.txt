@@ -1,0 +1,9 @@
+by³ problem z taskami - 
+
+ta linijka nie chce dzia³aæ, mo¿e to naprawiê póŸniej; sklei³em trochê rêcznie
+
+Task_result_out$Max_date<-stri_datetime_parse(Task_result_out$Max_date,format = "uuuu-MM-dd HH:mm:ss",
+  lenient = FALSE, tz = NULL, locale = NULL)
+
+
+----> wszystko ok. tylko w pliku koñcowym s¹ raz daty z godzin¹ a raz bez. mo¿na to poprawiæ rêcznie
